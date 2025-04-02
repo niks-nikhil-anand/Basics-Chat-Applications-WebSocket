@@ -6,6 +6,30 @@
     <title>Chat App</title>
 </head>
 <body>
-    <h1>Chat App</h1>
+    <h1>Web Socket.io Chat App</h1>
+    <div>
+        <input type="text" id="message" placeholder="Type your message here...">
+        <button id="send">Send</button>
+    </div>
+    <div>
+        <h2>Messages</h2>
+        <ul id="messages"></ul>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();  
+        const messageInput = document.getElementById('message');
+        const sendButton = document.getElementById('send');
+        const messageList = document.getElementById('messages');
+
+        sendButton.addEventListener('click' , () => {
+            const message = messageInput.value; 
+                socket.emit('chat message', message);
+                messageInput.value = '';
+        })
+
+        socket.on()
+
+    </script>
 </body>
 </html>
