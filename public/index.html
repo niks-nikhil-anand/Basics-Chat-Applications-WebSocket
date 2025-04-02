@@ -21,15 +21,30 @@
         const messageInput = document.getElementById('message');
         const sendButton = document.getElementById('send');
         const messageList = document.getElementById('messages');
-
-        sendButton.addEventListener('click' , () => {
-            const message = messageInput.value; 
-                socket.emit('chat message', message);
-                messageInput.value = '';
-        })
-
-        socket.on()
-
+    
+        sendButton.addEventListener('click', () => {
+            const message = messageInput.value;
+            socket.emit('message', message); 
+            messageInput.value = '';
+        });
+    
+        socket.on('message', (message) => {
+            console.log("Received:", message);
+            const li = document.createElement('li');
+            li.textContent = message; 
+            messageList.appendChild(li);
+        });
+    
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
+    
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server');
+        });
+    
+        // Removed empty socket.on()
     </script>
+    
 </body>
 </html>
